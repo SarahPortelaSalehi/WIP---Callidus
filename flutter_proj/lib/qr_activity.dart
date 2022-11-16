@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class QRCodeActivity extends StatelessWidget {
   //const MeuApp({Key? key}) : super(key: key);
   const QRCodeActivity({super.key});
+  final String data = '2067a';
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +106,43 @@ class QRCodeActivity extends StatelessWidget {
             const SizedBox(
               width: 200.0,
               height: 240.0,
+            ),
+            //Texto
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: TextFormField(
+                cursorColor: Colors.black,
+                style: const TextStyle(color: Colors.black, fontSize: 20),
+                decoration: const InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    border:
+                    OutlineInputBorder(borderRadius: BorderRadius.zero)),
+                maxLines: 1,
+              ),
+            ),
+            Center(
+              child: Column(
+                children: <Widget> [
+                  Text(
+                    'Código gerado com a palavra: $data',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+
+                  QrImage(
+                    data: data,
+                    size: 180,
+                    foregroundColor: Colors.white,
+                    //backgroundColor: Colors.black,
+                    gapless: true,
+                    errorCorrectionLevel: QrErrorCorrectLevel.H,
+                  ),
+                ],
+              ),
             ),
             Center(
               child: ClipRRect(
